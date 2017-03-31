@@ -39,13 +39,14 @@ button {
 }
 
 button.blue {
-  background-color: #44f;
+  background-color: #55e;
   color: white;
 }
 button.yellow {
-  background-color: #ff4;
+  background-color: #dc6;
+  color: black;
 }
 button.green {
-  background-color: #4f4;
+  background-color: #3c3;
   color: white;
 }
