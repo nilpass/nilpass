@@ -30,6 +30,7 @@ let countdownInterval = null;
 const activeStateControls = document.getElementById('active');
 const inactiveStateControls = document.getElementById('inactive');
 const countdownElement = document.getElementById('countdown');
+const passnameElement = document.getElementById('passname');
 
 function passwordExpiryHack() {
     // This is sort of a hack to shortcut waiting for the status update
@@ -61,6 +62,7 @@ function updateActivePasswordState() {
       updateCountdown();
       countdownInterval = setInterval(updateCountdown, 1000);
     }
+    passnameElement.textContent = activePassword.name;
   } else {
     clearInterval(countdownInterval);
     countdownInterval = null;
