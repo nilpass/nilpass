@@ -19,6 +19,7 @@ body {
   flex: none;
   display: flex;
   flex-flow: row;
+  justify-content: center;
 }
 .row > :not(:first-child) {
   margin-left: 4px;
