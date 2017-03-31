@@ -10,11 +10,11 @@
     </div>
     <div id="active" class="row rows" hidden>
       <div id="actions" class="row">
-        <button type="button" class="yellow flex">Fill password</button>
+        <button type="button" id="fill" class="yellow flex">Fill password</button>
       </div>
       <div id="troubleshooting" class="row rows">
         <form id="shortenform" class="row">
-          <input id="shortento" class="flex"><button>Shorten</button>
+          <input step="1" min="1" id="shortento" class="flex"><button>Shorten</button>
         </form>
         <div class="row">
           <button type="button" class="flex">Show password</button>
@@ -29,7 +29,7 @@
         </form>
         </div>
         <div class="row">
-          <button type="button" class="blue flex" id="forget">Forget password</button>
+          <button type="button" id="forget" class="blue flex">Forget password</button>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
         <button type="button" class="flex">Pick other</button>
       </div>
       <div class="row">
-        <button type="button" class="green flex" id="generate">Generate password</button>
+        <button type="button" id="generate" class="green flex">Generate password</button>
       </div>
     </div>
     <script src="/vendor/parseDuration.js"></script>
