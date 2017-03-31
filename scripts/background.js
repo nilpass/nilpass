@@ -57,12 +57,19 @@ const generateRandomPassword = (function(){
   };
 })();
 
-// TODO: Add domain parsing magic to all these
-function generatePasswordForDomain() {
+function generatePasswordForName(name) {
 
 }
 
 function getPasswordStatus(respond) {
+  return respond(transientPasswordStore.getStatus());
+}
+
+function forgetPasswordForName(name) {
+
+}
+
+function setPasswordExpiryForName(name) {
 
 }
 
@@ -76,10 +83,10 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     case 'getPasswordStatus':
       return getPasswordStatus(respond);
     case 'generatePassword':
-      return generatePasswordForDomain(message.domain);
+      return generatePasswordForName(message.name);
     case 'forgetPassword':
-      return
-    case 'extendPasswordExpiry':
-      return
+      return forgetPasswordForName(message.name);
+    case 'setPasswordExpiry':
+      return setPasswordExpiryForName(message.name);
   }
 });

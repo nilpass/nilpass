@@ -51,6 +51,22 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   }
 });
 
-function requestPasswordGeneration() {
+function getDomainOfUrl(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  return a.hostname;
+}
 
+function requestPasswordGeneration() {
+  return pActiveTab.then(activeTab =>
+    messageResponsePromise({method: 'generatePassword',
+      name: getDomainOfUrl(activeTab.url)}))
+  .then(updatePasswordStatus);
+}
+
+function fillPassword(password) {
+  chrome.tabs.executeScript({code: `
+    for (let input of document.querySelectorAll('input[type=password]') {
+      input.value = ${JSON.stringify(password)};
+    }`});
 }
