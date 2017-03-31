@@ -135,7 +135,7 @@ document.getElementById('forget')
 
 const ttlInput = document.getElementById('ttl');
 
-function updateTTL() {
+function updateTTL(event) {
   const ttl = parseDuration(ttlInput.value);
   if (ttl) {
     const expiry = Date.now() + ttl;
@@ -151,6 +151,7 @@ function updateTTL() {
     // TODO: teach parseDuration to differentiate between 0 and unparsable
     //       (or just switch to https://github.com/zeit/ms)
   }
+  return event.preventDefault();
 }
 
 document.getElementById('expiryform')
