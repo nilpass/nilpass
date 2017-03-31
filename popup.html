@@ -5,43 +5,43 @@
     <link rel="stylesheet" href="/stylesheets/popup.css">
   </head>
   <body class="rows">
-  <div class="row">
-    <p class="status"></p>
-  </div>
-  <div id="active" class="row rows" hidden>
-    <div id="actions" class="row">
-      <button type="button" class="yellow flex">Fill password</button>
-    </div>
-    <div id="troubleshooting" class="row rows">
-      <form id="shortenform" class="row">
-        <input id="shortento" class="flex"><button>Shorten</button>
-      </form>
-      <div class="row">
-        <button type="button" class="flex">Show password</button>
-      </div>
-    </div>
-    <div id="expiry" class="row rows">
-      <div class="row">
-        <p>Will forget in <span id="countdown"></span><p>
-      </div>
-      <form id="expiryform" class="row">
-        <input id="ttl" class="flex" value="5 min"><button>Reset countdown</button>
-      </form>
-      </div>
-      <div class="row">
-        <button type="button" class="blue flex" id="forget">Forget password</button>
-      </div>
-    </div>
-  </div>
-  <div id="inactive" class="row rows" hidden>
-    <div id="others" class="row" hidden>
-      <button type="button" class="flex">Pick other</button>
-    </div>
     <div class="row">
-      <button type="button" class="green flex" id="generate">Generate password</button>
+      <p class="status"></p>
     </div>
-  </div>
-  <script src="/vendor/parseDuration.js"></script>
-  <script src="/scripts/popup.js"></script>
+    <div id="active" class="row rows" hidden>
+      <div id="actions" class="row">
+        <button type="button" class="yellow flex">Fill password</button>
+      </div>
+      <div id="troubleshooting" class="row rows">
+        <form id="shortenform" class="row">
+          <input id="shortento" class="flex"><button>Shorten</button>
+        </form>
+        <div class="row">
+          <button type="button" class="flex">Show password</button>
+        </div>
+      </div>
+      <div id="expiry" class="row rows">
+        <div class="row">
+          <p>Will forget in <span id="countdown"></span><p>
+        </div>
+        <form id="expiryform" class="row">
+          <input id="ttl" class="flex" value="5 min"><button>Reset countdown</button>
+        </form>
+        </div>
+        <div class="row">
+          <button type="button" class="blue flex" id="forget">Forget password</button>
+        </div>
+      </div>
+    </div>
+    <div id="inactive" class="row rows" hidden>
+      <div id="others" class="row" hidden>
+        <button type="button" class="flex">Pick other</button>
+      </div>
+      <div class="row">
+        <button type="button" class="green flex" id="generate">Generate password</button>
+      </div>
+    </div>
+    <script src="/vendor/parseDuration.js"></script>
+    <script src="/scripts/popup.js"></script>
   </body>
 </html>
