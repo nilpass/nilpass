@@ -20,6 +20,9 @@ body {
   display: flex;
   flex-flow: row;
 }
+.row > :not(:first-child) {
+  margin-left: 4px;
+}
 .flex {
   flex: 1;
 }
