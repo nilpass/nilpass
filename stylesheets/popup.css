@@ -20,7 +20,7 @@ body {
 .flex {
   flex: 1;
 }
-#expiry, #troubleshooting {
+#troubleshooting {
   display: none;
 }
 
