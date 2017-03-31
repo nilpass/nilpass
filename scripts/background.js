@@ -57,8 +57,13 @@ const generateRandomPassword = (function(){
   };
 })();
 
-function generatePasswordForName(name) {
-
+function generatePasswordForName(name, respond) {
+  transientPasswordStore.set(name, {
+    password: generateRandomPassword(),
+    // TODO: Make default expiry configurable
+    expiry: Date.now() + 3e5
+  });
+  return respond(transientPasswordStore.getStatus());
 }
 
 function getPasswordStatus(respond) {
@@ -66,11 +71,11 @@ function getPasswordStatus(respond) {
 }
 
 function forgetPasswordForName(name) {
-
+  transientPasswordStore.delete(name);
 }
 
-function setPasswordExpiryForName(name) {
-
+function setPasswordExpiryForName(name, expiry) {
+  transientPasswordStore.setExpiry(name, expiry);
 }
 
 chrome.runtime.onStartup.addListener(() => {
@@ -83,10 +88,12 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
     case 'getPasswordStatus':
       return getPasswordStatus(respond);
     case 'generatePassword':
-      return generatePasswordForName(message.name);
+      return generatePasswordForName(message.name, respond);
     case 'forgetPassword':
       return forgetPasswordForName(message.name);
     case 'setPasswordExpiry':
-      return setPasswordExpiryForName(message.name);
+      return setPasswordExpiryForName(message.name, message.expiry);
   }
 });
+
+// TODO: Handle incoming port connections for ongoing status updates

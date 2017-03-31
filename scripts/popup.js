@@ -16,11 +16,6 @@ function getActiveTab() {
     ).then(tabs => tabs[0]);
 }
 
-function expressionInActiveTab(code) {
-  return new lastErrorPromise(resolve =>
-    chrome.tabs.executeScript({code}, resolve)).then(([result]) => result);
-}
-
 function messageResponsePromise(message) {
   return new lastErrorPromise(resolve =>
     chrome.runtime.sendMessage(message, resolve));
@@ -28,26 +23,37 @@ function messageResponsePromise(message) {
 
 const pActiveTab = getActiveTab();
 
+let passwords = [];
+let activePassword = null;
+
+function updateActivePasswordState() {
+
+}
+
+function updatePasswords() {
+  if (passwords.length > 0) {
+    // TODO: Default to matching name or something
+    activePassword = passwords[0];
+  }
+  updateActivePasswordState();
+}
+
 // TODO: subscribe to live out-of-band updates on this
-function updatePasswordStatus(statuses) {
-  pActiveTab.then(activeTab => {
-
-    // TODO: If there's an active password, set an interval to update the
-    //       countdown to expiration
-
-  });
+function receiveStatusUpdate(status) {
+  passwords = status.passwords;
+  updatePasswords();
 }
 
 // Set the initial password state
 messageResponsePromise({method: 'getPasswordStatus'})
-  .then(updatePasswordStatus);
+  .then(receiveStatusUpdate);
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
   switch (message.method) {
     // NOTE: this will probably not ever be implemented -
     // status subscriptions will probably use runtime.connect
     case 'statusUpdate':
-      return updatePasswordStatus(message.statuses);
+      return receiveStatusUpdate(message.status);
   }
 });
 
@@ -60,13 +66,19 @@ function getDomainOfUrl(url) {
 function requestPasswordGeneration() {
   return pActiveTab.then(activeTab =>
     messageResponsePromise({method: 'generatePassword',
-      name: getDomainOfUrl(activeTab.url)}))
-  .then(updatePasswordStatus);
+      name: activeTab.url && getDomainOfUrl(activeTab.url) || 'nowhere'}))
+  .then(updatePasswords);
 }
 
-function fillPassword(password) {
+document.getElementById('generate')
+  .addEventListener('click', requestPasswordGeneration);
+
+function fillPassword() {
   chrome.tabs.executeScript({code: `
     for (let input of document.querySelectorAll('input[type=password]') {
-      input.value = ${JSON.stringify(password)};
+      input.value = ${JSON.stringify(activePassword.password)};
     }`});
 }
+
+document.getElementById('generate')
+  .addEventListener('click', fillPassword);
