@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body class="rows">
+<div class="row">
+  <p class="status"></p>
+</div>
+<div id="active" class="row rows" hidden>
+  <div id="actions" class="row">
+    <button type="button" class="yellow flex">Fill password</button>
+  </div>
+  <div id="troubleshooting" class="row rows">
+    <form id="shortenform" class="row">
+      <input id="shortento" class="flex"><button>Shorten</button>
+    </form>
+    <div class="row">
+      <button type="button" class="flex">Show password</button>
+    </div>
+  </div>
+  <div id="expiry" class="row rows">
+    <div class="row">
+      <p>Expires in <span id="expiretime"></span><p>
+    </div>
+    <form id="extendform" class="row">
+      <input id="extendtime" class="flex" value="5 min"><button>Extend</button>
+    </form>
+    </div>
+    <div class="row">
+      <button type="button" class="blue flex">Forget password</button>
+    </div>
+  </div>
+</div>
+<div id="inactive" class="row rows" hidden>
+  <div id="others" class="row">
+    <button type="button" class="flex">Pick other</button>
+  </div>
+  <div class="row">
+    <button type="button" class="green flex">Generate password</button>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "nilpass",
+  "version": "0.0.0",
+  "icons": { "48": "icon/48px.png",
+            "128": "icon/108px+20px-margin.png" },
+  "description": "The most secure password store possible",
+  "browser_action": {
+    "default_title": "nilpass",
+    "default_popup": "popup.html"
+  },
+  "author": "Stuart P. Bentley",
+  "background": {
+    "scripts": [
+      "lib/transientPasswordStore.js",
+      "scripts/background.js"],
+    "persistent": false
+  },
+  "incognito": "split",
+  "homepage_url": "https://nilpass.com/",
+  "permissions": [
+    "tabs"
+  ]
+}

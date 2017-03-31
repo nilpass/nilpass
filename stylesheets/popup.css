@@ -1,0 +1,47 @@
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 4px;
+  min-width: 100px;
+}
+
+.rows {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+}
+.row {
+  flex: none;
+  display: flex;
+  flex-flow: row;
+}
+.flex {
+  flex: 1;
+}
+#expiry, #troubleshooting {
+  display: none;
+}
+
+button {
+  border-radius: 2px;
+  background-color: #ddd;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+}
+
+button.blue {
+  background-color: #44f;
+  color: white;
+}
+button.yellow {
+  background-color: #ff4;
+}
+button.green {
+  background-color: #4f4;
+  color: white;
+}
