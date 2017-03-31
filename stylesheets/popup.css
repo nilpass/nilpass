@@ -26,6 +26,7 @@ body {
 
 button {
   border-radius: 2px;
+  border: none;
   background-color: #ddd;
   display: flex;
   flex-flow: row;
