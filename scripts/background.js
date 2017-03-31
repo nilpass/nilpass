@@ -78,10 +78,8 @@ function setPasswordExpiryForName(name, expiry) {
   transientPasswordStore.setExpiry(name, expiry);
 }
 
-chrome.runtime.onStartup.addListener(() => {
-  // deserialize any cookied passwords
-  transientPasswordStore.init();
-});
+// deserialize any cookied passwords
+transientPasswordStore.init();
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
   switch (message.method) {
