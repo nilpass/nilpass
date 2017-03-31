@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/stylesheets/popup.css">
   </head>
-  <body class="col">
-    <div class="row">
-      <p class="status"></p>
-    </div>
+  <body>
     <div id="active" class="col" hidden>
       <div id="actions" class="row">
         <button type="button" id="fill" class="yellow flex">Fill password</button>
@@ -34,6 +31,9 @@
       </div>
     </div>
     <div id="inactive" class="col" hidden>
+      <div class="row">
+        <p class="status">No password in memory</p>
+      </div>
       <div id="others" class="row" hidden>
         <button type="button" class="flex">Pick other</button>
       </div>
