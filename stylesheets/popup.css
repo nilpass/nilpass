@@ -35,7 +35,7 @@ button {
   flex-flow: row;
   align-items: center;
   justify-content: center;
-  height: 20px;
+  height: 27px;
 }
 
 button.blue {
