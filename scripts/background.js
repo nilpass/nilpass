@@ -66,7 +66,7 @@ function getPasswordStatus(respond) {
 
 }
 
-chrome.runtime.onStartup(() => {
+chrome.runtime.onStartup.addListener(() => {
   // deserialize any cookied passwords
   transientPasswordStore.init();
 });
