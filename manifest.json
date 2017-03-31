@@ -19,6 +19,6 @@
   "incognito": "split",
   "homepage_url": "https://nilpass.com/",
   "permissions": [
-    "tabs"
+    "activeTab"
   ]
 }
