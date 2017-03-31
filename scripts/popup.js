@@ -114,7 +114,7 @@ document.getElementById('generate')
 
 function fillPassword() {
   chrome.tabs.executeScript({code: `
-    for (let input of document.querySelectorAll('input[type=password]') {
+    for (let input of document.querySelectorAll('input[type=password]')) {
       input.value = ${JSON.stringify(activePassword.password)};
     }`});
 }
