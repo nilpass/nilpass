@@ -7,6 +7,10 @@ body {
   min-width: 200px;
 }
 
+p {
+  margin: 0;
+}
+
 .col {
   display: flex;
   flex-flow: column;
@@ -27,6 +31,7 @@ body {
 .flex {
   flex: 1;
 }
+
 #troubleshooting {
   display: none;
 }
