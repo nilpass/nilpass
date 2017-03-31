@@ -12,6 +12,9 @@ body {
   flex-flow: column;
   align-items: stretch;
 }
+.col > :not(:first-child) {
+  margin-top: 4px;
+}
 .row {
   flex: none;
   display: flex;
