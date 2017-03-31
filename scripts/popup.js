@@ -46,7 +46,7 @@ function updateCountdown() {
   if (timeleft <= 0) {
     passwordExpiryHack();
   } else {
-    const minutes = Math.min(timeleft / 60000);
+    const minutes = Math.floor(timeleft / 60000);
     let seconds = Math.floor(timeleft / 1000 % 60);
     if (seconds < 10) seconds = '0' + seconds;
     countdownElement.textContent = `${minutes}:${seconds}`;
