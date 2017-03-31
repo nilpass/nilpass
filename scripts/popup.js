@@ -106,7 +106,7 @@ function requestPasswordGeneration() {
   return pActiveTab.then(activeTab =>
     messageResponsePromise({method: 'generatePassword',
       name: activeTab.url && getDomainOfUrl(activeTab.url) || 'nowhere'}))
-  .then(updatePasswords);
+  .then(receiveStatusUpdate);
 }
 
 document.getElementById('generate')
