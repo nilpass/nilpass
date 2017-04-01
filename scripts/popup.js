@@ -1,4 +1,4 @@
-/* global chrome parseDuration */
+/* global location URL chrome parseDuration psl */
 
 "use strict";
 
@@ -98,27 +98,49 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   }
 });
 
-function getDomainOfUrl(url) {
-  const a = document.createElement('a');
-  a.href = url;
-  return a.hostname;
-}
-
 function requestPasswordGeneration() {
   return pActiveTab.then(activeTab =>
     messageResponsePromise({method: 'generatePassword',
-      name: activeTab.url && getDomainOfUrl(activeTab.url) || 'nowhere'}))
+      name: activeTab.url && new URL(activeTab.url).hostname || 'nowhere'}))
   .then(receiveStatusUpdate);
 }
 
 document.getElementById('generate')
   .addEventListener('click', requestPasswordGeneration);
 
-function fillPassword() {
-  chrome.tabs.executeScript({code: `
+function allFramesFill(password, domain) {
+  if (location.hostname.slice(-domain.length) == domain) {
     for (let input of document.querySelectorAll('input[type=password]')) {
-      input.value = ${JSON.stringify(activePassword.password)};
-    }`});
+      input.value = password;
+    }
+  }
+}
+
+function topFrameFill(password) {
+  for (let input of document.querySelectorAll('input[type=password]')) {
+    input.value = password;
+  }
+}
+
+function injectableCall(func, args) {
+  return `(${func.toString()})(${args.map(JSON.stringify).join()});`;
+}
+
+function fillPassword() {
+  pActiveTab.then(activeTab => {
+    // Fill into same-private-suffix frames under HTTP(S)
+    if (/https?:/.test(new URL(activeTab.url).protocol)) {
+      const privateDomain = psl.parse(new URL(activeTab.url).hostname).domain;
+      return chrome.tabs.executeScript({ allFrames: true,
+        code: injectableCall(allFramesFill,
+          [activePassword.password, privateDomain])});
+
+    // Under anything else, just do the top frame
+    } else {
+      return chrome.tabs.executeScript({
+        code: injectableCall(topFrameFill, [activePassword.password])});
+    }
+  });
 }
 
 document.getElementById('fill')
