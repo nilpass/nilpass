@@ -101,7 +101,8 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
 function requestPasswordGeneration() {
   return pActiveTab.then(activeTab =>
     messageResponsePromise({method: 'generatePassword',
-      name: activeTab.url && new URL(activeTab.url).hostname || 'nowhere'}))
+      name: activeTab.url && psl.parse(new URL(activeTab.url).hostname).domain
+        || 'nowhere'}))
   .then(receiveStatusUpdate);
 }
 
