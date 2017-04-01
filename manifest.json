@@ -20,5 +20,6 @@
   "homepage_url": "https://nilpass.com/",
   "permissions": [
     "activeTab"
-  ]
+  ],
+  "optional_permissions": ["*://*/*"]
 }

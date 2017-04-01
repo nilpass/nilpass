@@ -129,9 +129,12 @@ function injectableCall(func, args) {
 function fillPassword() {
   pActiveTab.then(activeTab => {
     // Fill into same-private-suffix frames under HTTP(S)
+    // NOTE: The suffix test is effectively superfluous without cross-origin
+    // permissions, which we've yet to request:
+    // see https://github.com/nilpass/nilpass/issues/4
     if (/https?:/.test(new URL(activeTab.url).protocol)) {
       const privateDomain = psl.parse(new URL(activeTab.url).hostname).domain;
-      return chrome.tabs.executeScript({ allFrames: true,
+      return chrome.tabs.executeScript({allFrames: true,
         code: injectableCall(allFramesFill,
           [activePassword.password, privateDomain])});
 
