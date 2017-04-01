@@ -131,7 +131,7 @@ function fillPassword() {
     // Fill into same-private-suffix frames under HTTP(S)
     if (/https?:/.test(new URL(activeTab.url).protocol)) {
       const privateDomain = psl.parse(new URL(activeTab.url).hostname).domain;
-      return chrome.tabs.executeScript({ allFrames: true,
+      return chrome.tabs.executeScript({allFrames: true, frameId: 0,
         code: injectableCall(allFramesFill,
           [activePassword.password, privateDomain])});
 
