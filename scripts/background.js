@@ -1,19 +1,10 @@
-/* global chrome btoa transientPasswordStore */
+/* global browser btoa transientPasswordStore */
 
 "use strict";
 
-function lastErrorPromise(cb) {
-  return new Promise((resolve, reject) => {
-    cb(value => chrome.runtime.lastError
-      ? reject(chrome.runtime.lastError)
-      : resolve(value));
-  });
-}
-
 function getActiveTab() {
-  return new lastErrorPromise(resolve =>
-    chrome.tabs.query({active: true, currentWindow: true}, resolve)
-    ).then(tabs => tabs[0]);
+  return browser.tabs.query(
+    {active: true, currentWindow: true}, resolve).then(tabs => tabs[0]);
 }
 
 const generateRandomPassword = (function(){
@@ -81,7 +72,7 @@ function setPasswordExpiryForName(name, expiry) {
 // deserialize any cookied passwords
 transientPasswordStore.init();
 
-chrome.runtime.onMessage.addListener((message, sender, respond) => {
+browser.runtime.onMessage.addListener((message, sender, respond) => {
   switch (message.method) {
     case 'getPasswordStatus':
       return getPasswordStatus(respond);

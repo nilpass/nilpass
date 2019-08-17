@@ -1,4 +1,4 @@
-/* global chrome */
+/* global browser */
 
 "use strict";
 
@@ -8,7 +8,7 @@ function setAllPasswordInputsTo(password){
   }
 }
 
-chrome.runtime.onMessage.addListener((message, sender, respond) => {
+browser.runtime.onMessage.addListener((message, sender, respond) => {
   switch (message.method) {
     case 'setPassword':
       return setAllPasswordInputsTo(message.password);

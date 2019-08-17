@@ -16,7 +16,6 @@
       "scripts/background.js"],
     "persistent": false
   },
-  "incognito": "split",
   "homepage_url": "https://nilpass.com/",
   "permissions": [
     "activeTab"
